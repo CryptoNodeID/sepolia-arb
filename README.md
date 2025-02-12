@@ -33,17 +33,20 @@
 ### Relogin to your server to take effect from usermod !!!
 
 ## Install and Run
-- **Create necessary folders**
-    ```
-    mkdir /home/arb-data
-    ```
-- **Clone this repo to your server and start all docker containers**
+- **Clone this repo to your server**
     ```
     git clone https://github.com/CryptoNodeID/sepolia-arb.git
     cd sepolia-arb
+    ```
+- **Create necessary folders**
+    ```
+    mkdir -p $home/sepolia-arb/arb-data
+    ```
+- **Start all docker containers**
+    ```
     docker compose up -d
     ```
 - **To check the logs**
     ```
-        docker compose logs -f
+    docker compose logs -f
     ```

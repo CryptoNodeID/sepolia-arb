@@ -1,23 +1,31 @@
 services:
   arb-sepolia:
     container_name: arb-sepolia
-    stdin_open: true
-    tty: true
-    image: offchainlabs/nitro-node:v3.0.3-3ecd01e
+    image: offchainlabs/nitro-node:v3.4.0-d896e9c
+    restart: unless-stopped
+    stop_grace_period: 5m
     command:
       --chain.id=421614
-      --parent-chain.connection.url=<your eth-sepolia endpoint default port 8545>
-      --parent-chain.blob-client.beacon-url=<your beacon endpoint default port 3500>
+      --parent-chain.connection.url=http://geth-sepolia:22545
+      --parent-chain.blob-client.beacon-url=http://prysm-sepolia:22500
       --http.api=net,web3,eth
       --http.corsdomain=*
       --http.addr=0.0.0.0
       --http.vhosts=*
+      --http.port=22557
+      --execution.rpc.gas-cap=0
       --ws.addr 0.0.0.0
-      --ws.port=8548
+      --ws.port=22558
       --ws.origins=*
-      --init.url="https://snapshot.arbitrum.foundation/sepolia/nitro-pruned.tar"
+      --init.latest=pruned
     volumes:
-      - /home/arb-data:/home/user/.arbitrum
+      - ./arb-data:/home/user/.arbitrum
     ports:
-      - 20547:8547 # json-rpc endpoint
-      - 20548:8548 # ws endpoint
+      - 22557:22557 # json-rpc endpoint
+      - 22558:22558 # ws endpoint
+    networks:
+      - cnid
+
+networks:
+  cnid:
+    external: true
