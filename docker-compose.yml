@@ -1,7 +1,7 @@
 services:
   arb-sepolia:
     container_name: arb-sepolia
-    image: offchainlabs/nitro-node:v3.4.0-d896e9c
+    image: offchainlabs/nitro-node:v3.6.0-fc07dd2
     restart: unless-stopped
     stop_grace_period: 5m
     command:
@@ -13,7 +13,7 @@ services:
       --http.addr=0.0.0.0
       --http.vhosts=*
       --http.port=22557
-      --execution.rpc.gas-cap=0
+      --execution.rpc.gas-cap=10000000000
       --ws.addr 0.0.0.0
       --ws.port=22558
       --ws.origins=*
